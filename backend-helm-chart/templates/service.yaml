@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.internalPort }}
+      targetPort: 8080
+      protocol: {{ .Values.service.protocol }}
+  selector:
+    app: {{ .Values.service.name }}
+    tier: {{ .Values.service.tier }}
+

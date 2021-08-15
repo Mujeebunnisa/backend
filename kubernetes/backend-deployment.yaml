@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: mspace
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: backend
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: backend
+        track: stable
+    spec:
+      containers:
+      - name: hello
+        image: "mujeeb/backend-docker"
+        imagePullPolicy: Never  #change this to 'Always' when fetching the image from registry
+        env:
+        - name: NAME
+          value: "Mujeebunnisa"
+        ports:
+        - name: http
+          containerPort: 80
+

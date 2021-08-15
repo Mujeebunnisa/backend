@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+      tier: {{ .Values.service.tier }}
+      track: {{ .Values.service.track }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+        tier: {{ .Values.service.tier }}
+        track: {{ .Values.service.track }}
+    spec:
+      containers:
+      - name: {{ .Values.service.name }}
+        image: "{{ .Values.image.repository }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+         {{- range .Values.env }}
+        - name: {{ .name }}
+          value: {{ .value }}
+          {{- end }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.internalPort }}

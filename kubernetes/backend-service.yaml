@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  namespace: mspace
+spec:
+  selector:
+    app: hello
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+# uncomment this to test the backend service alone.
+#  type: LoadBalancer
