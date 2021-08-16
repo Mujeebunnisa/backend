@@ -27,9 +27,7 @@ kubectl config use-context minikube
 
 kubectl cluster-info
 
-### Without pushing the docker image to the registry we can still deploy on minikube by setting minikube vm as docker host
-### (backend-deployment.yaml has imagePullPolicy: Never which will ensure the image is pulled from local , it can be changed to Always when we want to pull
-### image from registry)
+### Without pushing the docker image to the registry we can still deploy on minikube by setting minikube vm as docker host (backend-deployment.yaml has imagePullPolicy: Never which will ensure the image is pulled from local , it can be changed to Always when we want to pull image from registry)
 
 eval $(minikube docker-env)
 
@@ -59,13 +57,13 @@ minikube service hello -n mspace
 
 
 ## Note: To run LoadBalancer type in minikube using minikube tunnel(start this service in seperate terminal) without which external IP would not be generated
-
+minikube tunnel
 
 ## Deploy using helm chart
 helm install backend backend-helm-chart
 
 ### To change the value of name
- helm install  --set envNameValue="<your value>" backend backend-helm-chart
+helm install  --set envNameValue="<your value>" backend backend-helm-chart
 
 
 
