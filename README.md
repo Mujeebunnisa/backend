@@ -15,36 +15,35 @@ docker run -p 8080:8080 -t mujeeb/backend-docker (using the local docker image)
 
 ## Deploy on kubernetes and run using minikube
 
-** start minikube
+### start minikube
 
 minikube start — vm-driver=hyperkit (default driver is VirtualBox, for mac it is hyperkit)
 
-** set the context to use minikube
+### set the context to use minikube
 
 kubectl config use-context minikube
 
-** verify that kubectl is configured to communicate with your cluster
+### verify that kubectl is configured to communicate with your cluster
 
 kubectl cluster-info
 
-** Without pushing the docker image to the registry we can still deploy on minikube by setting minikube vm as docker host
-** (backend-deployment.yaml has imagePullPolicy: Never which will ensure the image is pulled from local , it can be changed to Always when we want to pull
-** image from registry)
-
+### Without pushing the docker image to the registry we can still deploy on minikube by setting minikube vm as docker host
+### (backend-deployment.yaml has imagePullPolicy: Never which will ensure the image is pulled from local , it can be changed to Always when we want to pull
+### image from registry)
 
 eval $(minikube docker-env)
 
 
-** Now build to create docker image for the app
+### Now build to create docker image for the app
 docker build -t mujeeb/backend-docker .
 
-** Now deploy backend on minikube using the namespace.yaml, deployment.yaml and service.yaml
+### Now deploy backend on minikube using the namespace.yaml, deployment.yaml and service.yaml
 
 kubectl apply -f kubernetes/namespace.yaml
 kubectl apply -f kubernetes/backend-deployment.yaml
 kubectl apply -f kubernetes/backend-service.yaml
 
-** check if pods and service is created successfully
+### check if pods and service is created successfully
 
 kubectl get pods -n mspace
 kubectl get svc -n mspace
@@ -65,7 +64,7 @@ minikube service hello -n mspace
 ## Deploy using helm chart
 helm install backend backend-helm-chart
 
-**To change the value of name
+### To change the value of name
  helm install  --set envNameValue="<your value>" backend backend-helm-chart
 
 
