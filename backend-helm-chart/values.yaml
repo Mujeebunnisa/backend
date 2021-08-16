@@ -20,8 +20,8 @@ service:
   internalPort: 80
   protocol: TCP
 
-env:
-- name: "NAME"
-  value: "Mujeebunnisa"
+
+envName: "NAME"
+envNameValue: "Mujeebunnisa"
 
 

@@ -63,4 +63,8 @@ minikube service hello -n mspace
 # Deploy using helm chart
 helm install backend backend-helm-chart
 
+**To change the value of name
+ helm install  --set envNameValue="<your value>" backend backend-helm-chart
+
+
 
